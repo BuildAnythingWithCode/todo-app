@@ -1,2 +1,4 @@
 // Webpack Stuff
-export const greeting = 'Hello, Odinite!';
+'use strict';
+
+export const greeting = 'Functions file!';
