@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <dialog>
+      <div id="modal-content" class="flex column">
+        <button id="close-modal-x">&times;</button>
+        <h2>Ok, Let's Add Some Shit To Do</h2>
+        <form action="" method="post" class="flex column">
+          <input
+            id="the-shit"
+            type="text"
+            placeholder="What is the shit?"
+            required />
+          <textarea
+            id="the-details-of-the-shit"
+            type="text"
+            placeholder="What are the details of the shit?"
+            required></textarea>
+          <h3>How Important Is This Shit?</h3>
+          <label>
+            <input
+              type="radio"
+              id="importance-high"
+              name="importance"
+              value="high"
+              required />Really Important
+          </label>
+          <label>
+            <input
+              type="radio"
+              id="importance-medium"
+              name="importance"
+              value="medium"
+              required />Kinda Important
+          </label>
+          <label>
+            <input
+              type="radio"
+              id="importance-low"
+              name="importance"
+              value="low"
+              required />Not That Important
+          </label>
+          <h3>When Is This Shit Due?</h3>
+          <input type="date" name="due-date" id="due-date" required />
+          <h3>What Project Should This Shit Go Into?</h3>
+          <label>
+            <input
+              type="radio"
+              id="default-project"
+              name="project"
+              value="default" />Default Project</label
+          >
+          <label>
+            <input
+              type="radio"
+              id="other-project"
+              name="project"
+              value="other" />Create New Project...</label
+          >
+          <input
+            type="text"
+            id="custom-project"
+            name="custom-project"
+            placeholder="New Project Name..."
+            disabled />
+          <button type="submit" id="add-to-do">Add it!</button>
+        </form>
+        <button id="close-modal-lazy">Nevermind, I'm feeling lazy.</button>
+      </div>
+    </dialog>
+    <div id="entire-ui">
+      <div id="left-column" class="flex column">
+        <h2>Shit To Do</h2>
+      </div>
+      <div id="right-column" class="flex column">
+        <h2>Look At All The Shit You Have To Do</h2>
+      </div>
+      <div id="sidebar" class="flex column">
+        <h2>Projects:</h2>
+        <button id="default-project-sidebar">Default Project</button>
+      </div>
+      <div id="all-the-shit-you-have-to-do-section" class="flex column"></div>
+      <div id="footer" class="flex">
+        <button id="start-to-add-some-shit">Add Some Shit To Do</button>
+      </div>
+      <div id="boring-info" class="flex">
+        <a
+          href="https://github.com/BuildAnythingWithCode/TODO-List"
+          target="_blank"
+          >Made with love, or some shit</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
