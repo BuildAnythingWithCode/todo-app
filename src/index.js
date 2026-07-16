@@ -6,12 +6,12 @@ import { greeting } from './functions.js';
 
 console.log(greeting);
 
-import odinImage from './odin-image.png';
+// import odinImage from './odin-image.png';
 
-const image = document.createElement('img');
-image.src = odinImage;
+// const image = document.createElement('img');
+// image.src = odinImage;
 
-document.body.appendChild(image);
+// document.body.appendChild(image);
 
 // Buttons
 const button = {
