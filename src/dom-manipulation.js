@@ -1,5 +1,8 @@
 'use strict';
 
+// Values & Logic
+const listOfShitToDo = [];
+
 // Buttons
 const button = {
   beginAdding: document.querySelector('#start-to-add-some-shit'),
@@ -23,23 +26,36 @@ const element = {
 };
 
 // Constructor Function
-function ThingToDo(title, description, dueDate, priority, project) {
+function ThingToDo(title, description, dueDate, priority, project, isChecked) {
   this.title = title;
   this.description = description;
   this.dueDate = dueDate;
   this.priority = priority;
   this.project = project;
+  this.isChecked = isChecked;
 }
 
 // Regular Functions
-function addThingToDo(title, description, dueDate, priority, project) {
-  title = document.querySelector('#the-shit').value;
-  description = document.querySelector('#the-details-of-the-shit').value;
-  dueDate = document.querySelector('#due-date').value;
-  priority = document.querySelector('input[name="importance"]:checked').value;
+function refreshShitToDo() {}
+
+function deleteThisShit() {}
+
+function toggleCheckThisShit() {}
+
+function filterProject() {}
+
+function addThingToDo() {
+  const title = document.querySelector('#the-shit').value;
+  const description = document.querySelector('#the-details-of-the-shit').value;
+  const dueDate = document.querySelector('#due-date').value;
+  const priority = document.querySelector(
+    'input[name="importance"]:checked',
+  ).value;
+  const isChecked = false;
   const selectedProject = document.querySelector(
     'input[name="project"]:checked',
   ).value;
+  let project;
   if (selectedProject === 'other') {
     project = element.customProject.value;
     const newProject = document.createElement('button');
@@ -54,11 +70,23 @@ function addThingToDo(title, description, dueDate, priority, project) {
     dueDate,
     priority,
     project,
+    isChecked,
   );
   listOfShitToDo.push(newThingToDo);
   const newEntry = document.createElement('p');
-  newEntry.textContent = `Title: ${title}, Description: ${description}, Due Date: ${dueDate}, Priority: ${priority}, Project: ${project}`;
+  newEntry.textContent = `Title: ${title}, Description: ${description}, Due Date: ${dueDate}, Priority: ${priority}, Project: ${project}, Checked: ${isChecked}`;
   element.shitToDoSection.appendChild(newEntry);
+  const removeEntryBtn = document.createElement('button');
+  removeEntryBtn.textContent = 'Remove This Shit';
+  newEntry.appendChild(removeEntryBtn);
+  removeEntryBtn.addEventListener('click', () => {
+    const index = listOfShitToDo.indexOf(newThingToDo);
+    if (index > -1) {
+      listOfShitToDo.splice(index, 1);
+      newEntry.remove();
+    }
+    console.log(listOfShitToDo);
+  });
 }
 
 function toggleCustomProjectInput() {
@@ -80,7 +108,7 @@ function closeForm() {
   element.modal.close();
 }
 
-// Event Handlers
+// Event Handler Function
 function setupEventListeners() {
   button.beginAdding.addEventListener('click', () => {
     element.modal.showModal();
@@ -99,6 +127,7 @@ function setupEventListeners() {
   });
 }
 
+// Export Section
 export {
   button,
   element,
@@ -107,4 +136,5 @@ export {
   toggleCustomProjectInput,
   closeForm,
   setupEventListeners,
+  listOfShitToDo,
 };
