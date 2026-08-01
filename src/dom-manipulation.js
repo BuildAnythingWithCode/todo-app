@@ -29,15 +29,17 @@ const element = {
 };
 
 // Regular Functions
-function refreshShitToDo() {}
+// function refreshShitToDo() {}
 
-function deleteThisShit() {}
+// function deleteThisShit() {}
 
-function toggleCheckThisShit() {}
+// function toggleCheckThisShit() {}
 
-function filterProject() {}
-
-function addThingToDo() {
+// function filterProject() {}
+//
+// -----
+//
+function getFormValues() {
   const title = document.querySelector('#the-shit').value;
   const description = document.querySelector('#the-details-of-the-shit').value;
   const dueDate = document.querySelector('#due-date').value;
@@ -48,6 +50,9 @@ function addThingToDo() {
   const selectedProject = document.querySelector(
     'input[name="project"]:checked',
   ).value;
+}
+
+function createNewProject() {
   let project;
   if (selectedProject === 'other') {
     project = element.customProject.value;
@@ -57,6 +62,9 @@ function addThingToDo() {
   } else {
     project = 'Default Project';
   }
+}
+
+function addShitToDo() {
   const newThingToDo = new ThingToDo(
     title,
     description,
@@ -66,6 +74,9 @@ function addThingToDo() {
     isChecked,
   );
   listOfShitToDo.push(newThingToDo);
+}
+
+function displayShitToDo() {
   const newEntry = document.createElement('p');
   newEntry.textContent = `Title: ${title}, Description: ${description}, Due Date: ${dueDate}, Priority: ${priority}, Project: ${project}, Checked: ${isChecked}`;
   element.shitToDoSection.appendChild(newEntry);
@@ -81,6 +92,59 @@ function addThingToDo() {
     console.log(listOfShitToDo);
   });
 }
+
+// addThingToDo Function Refactored Below:
+function handleFormSubmission() {
+  getFormValues();
+  createNewProject();
+  addShitToDo();
+  displayShitToDo();
+}
+
+// function addThingToDo() {
+//   const title = document.querySelector('#the-shit').value;
+//   const description = document.querySelector('#the-details-of-the-shit').value;
+//   const dueDate = document.querySelector('#due-date').value;
+//   const priority = document.querySelector(
+//     'input[name="importance"]:checked',
+//   ).value;
+//   const isChecked = false;
+//   const selectedProject = document.querySelector(
+//     'input[name="project"]:checked',
+//   ).value;
+//   let project;
+//   if (selectedProject === 'other') {
+//     project = element.customProject.value;
+//     const newProject = document.createElement('button');
+//     newProject.textContent = element.customProject.value;
+//     button.defaultProjectSidebar.after(newProject);
+//   } else {
+//     project = 'Default Project';
+//   }
+//   const newThingToDo = new ThingToDo(
+//     title,
+//     description,
+//     dueDate,
+//     priority,
+//     project,
+//     isChecked,
+//   );
+//   listOfShitToDo.push(newThingToDo);
+//   const newEntry = document.createElement('p');
+//   newEntry.textContent = `Title: ${title}, Description: ${description}, Due Date: ${dueDate}, Priority: ${priority}, Project: ${project}, Checked: ${isChecked}`;
+//   element.shitToDoSection.appendChild(newEntry);
+//   const removeEntryBtn = document.createElement('button');
+//   removeEntryBtn.textContent = 'Remove This Shit';
+//   newEntry.appendChild(removeEntryBtn);
+//   removeEntryBtn.addEventListener('click', () => {
+//     const index = listOfShitToDo.indexOf(newThingToDo);
+//     if (index > -1) {
+//       listOfShitToDo.splice(index, 1);
+//       newEntry.remove();
+//     }
+//     console.log(listOfShitToDo);
+//   });
+// }
 
 function toggleCustomProjectInput() {
   element.choiceOfProject.forEach((radio) => {
@@ -113,7 +177,7 @@ function setupEventListeners() {
 
   element.form.addEventListener('submit', (event) => {
     event.preventDefault();
-    addThingToDo();
+    handleFormSubmission();
     console.log('form submitted!', listOfShitToDo);
     element.form.reset();
     element.modal.close();
@@ -125,7 +189,11 @@ export {
   domManipulationFileGreeting,
   button,
   element,
-  addThingToDo,
+  getFormValues,
+  createNewProject,
+  addShitToDo,
+  displayShitToDo,
+  handleFormSubmission,
   closeForm,
   setupEventListeners,
   toggleCustomProjectInput,
