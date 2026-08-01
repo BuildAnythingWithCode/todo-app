@@ -1,15 +1,5 @@
 'use strict';
 
-import {
-  domManipulationFileGreeting,
-  button,
-  element,
-  addThingToDo,
-  closeForm,
-  setupEventListeners,
-  toggleCustomProjectInput,
-} from './dom-manipulation.js';
-
 // Greeting
 const logicFileGreeting = 'Logic file successfully imported!';
 
