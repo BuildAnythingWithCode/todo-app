@@ -1,5 +1,8 @@
 'use strict';
 
+// Greeting
+const logicFileGreeting = 'Logic file successfully imported!';
+
 // Values & Logic
 const listOfShitToDo = [];
 
@@ -14,4 +17,4 @@ function ThingToDo(title, description, dueDate, priority, project, isChecked) {
 }
 
 // Export Section
-export { listOfShitToDo, ThingToDo };
+export { logicFileGreeting, listOfShitToDo, ThingToDo };

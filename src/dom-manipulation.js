@@ -2,6 +2,10 @@
 
 import { listOfShitToDo, ThingToDo } from './logic.js';
 
+// Greeting
+const domManipulationFileGreeting =
+  'Dom manipulation file successfully imported!';
+
 // Buttons
 const button = {
   beginAdding: document.querySelector('#start-to-add-some-shit'),
@@ -118,6 +122,7 @@ function setupEventListeners() {
 
 // Export Section
 export {
+  domManipulationFileGreeting,
   button,
   element,
   addThingToDo,

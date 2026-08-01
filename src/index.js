@@ -2,9 +2,9 @@
 
 // Webpack Stuff
 import './styles.css';
-import { greeting } from './functions.js';
-import { listOfShitToDo, ThingToDo } from './logic.js';
+import { logicFileGreeting, listOfShitToDo, ThingToDo } from './logic.js';
 import {
+  domManipulationFileGreeting,
   button,
   element,
   addThingToDo,
@@ -13,7 +13,8 @@ import {
   setupEventListeners,
 } from './dom-manipulation.js';
 
-console.log(greeting);
+console.log(logicFileGreeting);
+console.log(domManipulationFileGreeting);
 
 toggleCustomProjectInput();
 
