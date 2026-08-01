@@ -5,6 +5,7 @@ import './styles.css';
 import {
   logicFileGreeting,
   listOfShitToDo,
+  listOfProjects,
   ThingToDo,
   addShitToDo,
 } from './logic.js';

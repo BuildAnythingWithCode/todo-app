@@ -1,7 +1,12 @@
 'use strict';
 
 //Import Section
-import { listOfShitToDo, ThingToDo, addShitToDo } from './logic.js';
+import {
+  listOfShitToDo,
+  listOfProjects,
+  ThingToDo,
+  addShitToDo,
+} from './logic.js';
 
 // Test Greeting
 const domManipulationFileGreeting =
@@ -102,6 +107,7 @@ function closeForm() {
 
 // function toggleCheckThisShit() {}
 // function filterByProject() {}
+// function refreshShitToDo() {}
 
 // Event Handler Function
 function setupEventListeners() {

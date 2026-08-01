@@ -6,6 +6,9 @@ const logicFileGreeting = 'Logic file successfully imported!';
 // Array Of Shit To Do
 const listOfShitToDo = [];
 
+// Array Of Projects
+const listOfProjects = [];
+
 // Constructor Function
 function ThingToDo(title, description, dueDate, priority, project, isChecked) {
   this.title = title;
@@ -31,4 +34,10 @@ function addShitToDo(formValues, newProject) {
 }
 
 // Export Section
-export { logicFileGreeting, listOfShitToDo, ThingToDo, addShitToDo };
+export {
+  logicFileGreeting,
+  listOfShitToDo,
+  listOfProjects,
+  ThingToDo,
+  addShitToDo,
+};
