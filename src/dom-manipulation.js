@@ -29,16 +29,10 @@ const element = {
 };
 
 // Regular Functions
-// function refreshShitToDo() {}
-
-// function deleteThisShit() {}
-
 // function toggleCheckThisShit() {}
 
-// function filterProject() {}
-//
-// -----
-//
+// function filterByProject() {}
+
 function getFormValues() {
   const title = document.querySelector('#the-shit').value;
   const description = document.querySelector('#the-details-of-the-shit').value;
@@ -50,6 +44,7 @@ function getFormValues() {
   const selectedProject = document.querySelector(
     'input[name="project"]:checked',
   ).value;
+  return (title, description, dueDate, priority, isChecked, selectedProject);
 }
 
 function createNewProject() {
@@ -62,6 +57,7 @@ function createNewProject() {
   } else {
     project = 'Default Project';
   }
+  return project;
 }
 
 function addShitToDo() {
@@ -74,6 +70,7 @@ function addShitToDo() {
     isChecked,
   );
   listOfShitToDo.push(newThingToDo);
+  return newThingToDo;
 }
 
 function displayShitToDo() {
