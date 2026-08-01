@@ -3,11 +3,10 @@
 // Webpack Stuff
 import './styles.css';
 import { greeting } from './functions.js';
-import { listOfShitToDo } from './logic.js';
+import { listOfShitToDo, ThingToDo } from './logic.js';
 import {
   button,
   element,
-  ThingToDo,
   addThingToDo,
   toggleCustomProjectInput,
   closeForm,

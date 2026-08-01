@@ -1,6 +1,6 @@
 'use strict';
 
-import { listOfShitToDo } from './logic.js';
+import { listOfShitToDo, ThingToDo } from './logic.js';
 
 // Buttons
 const button = {
@@ -23,16 +23,6 @@ const element = {
   choiceOfProject: document.querySelectorAll("input[name='project']"),
   sidebar: document.querySelector('#sidebar'),
 };
-
-// Constructor Function
-function ThingToDo(title, description, dueDate, priority, project, isChecked) {
-  this.title = title;
-  this.description = description;
-  this.dueDate = dueDate;
-  this.priority = priority;
-  this.project = project;
-  this.isChecked = isChecked;
-}
 
 // Regular Functions
 function refreshShitToDo() {}
@@ -130,7 +120,6 @@ function setupEventListeners() {
 export {
   button,
   element,
-  ThingToDo,
   addThingToDo,
   toggleCustomProjectInput,
   closeForm,
