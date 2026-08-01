@@ -1,7 +1,6 @@
 'use strict';
 
-// Values & Logic
-const listOfShitToDo = [];
+import { listOfShitToDo } from './logic.js';
 
 // Buttons
 const button = {
@@ -136,5 +135,4 @@ export {
   toggleCustomProjectInput,
   closeForm,
   setupEventListeners,
-  listOfShitToDo,
 };
