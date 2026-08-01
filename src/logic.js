@@ -3,7 +3,6 @@
 // Greeting
 const logicFileGreeting = 'Logic file successfully imported!';
 
-// Values & Logic
 const listOfShitToDo = [];
 
 // Constructor Function
@@ -16,5 +15,18 @@ function ThingToDo(title, description, dueDate, priority, project, isChecked) {
   this.isChecked = isChecked;
 }
 
+function addShitToDo(formValues, newProject) {
+  const newThingToDo = new ThingToDo(
+    formValues.title,
+    formValues.description,
+    formValues.dueDate,
+    formValues.priority,
+    newProject,
+    formValues.isChecked,
+  );
+  listOfShitToDo.push(newThingToDo);
+  return newThingToDo;
+}
+
 // Export Section
-export { logicFileGreeting, listOfShitToDo, ThingToDo };
+export { logicFileGreeting, listOfShitToDo, ThingToDo, addShitToDo };

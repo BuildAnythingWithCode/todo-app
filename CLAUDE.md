@@ -40,8 +40,27 @@ Requirements checklist:
 
 ## Where we left off (update this at the end of each session)
 
-2026-08-01: Assessed the codebase together. Everything currently lives in
-`src/dom-manipulation.js` (data array, ThingToDo constructor, DOM code);
-`src/logic.js` is empty. Agreed the next step is the logic/DOM separation.
-Open tutoring question Gregory hasn't answered yet: which lines of
-`addThingToDo()` are application logic vs DOM manipulation?
+2026-08-01 (later): Big session. Gregory completed the module separation
+(logic.js = data + constructor, imports nothing; dom-manipulation.js = all DOM)
+AND refactored the old mega-function `addThingToDo` into single-responsibility
+functions: `handleFormSubmission` (conductor) → `getFormValues` →
+`createNewProject` → `addShitToDo` → `displayShitToDo`, wired with
+parameters/returns. Build green, behavior verified in browser.
+
+He fought hard through **scope and data-flow** (variables local to functions,
+catch-and-pass via return values). It clicked but is still fresh/fragile —
+reinforce gently next session, don't assume mastery. Deleted functions.js
+(dead code lesson). He knows: read webpack errors, `.js` extension required
+in imports ("type": "module"), circular imports are a fire alarm.
+
+Naming: the shit-themed names are INTENTIONAL (it's "a shit to do app" — his
+branding). Don't suggest renaming; it's settled.
+
+Next up (in rough order):
+1. Cleanup: delete commented-out old addThingToDo block, commit
+2. `addShitToDo` is still in dom-manipulation.js — it's pure logic; move it
+   to logic.js (nice small win to reinforce the concept)
+3. `createNewProject` still mixes logic (choosing project name) with DOM
+   (sidebar button) — good next split exercise
+4. Then: refreshShitToDo/render-from-array pattern, project filtering,
+   expand/edit todos, priority colors, localStorage, date-fns

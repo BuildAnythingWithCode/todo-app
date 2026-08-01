@@ -1,6 +1,6 @@
 'use strict';
 
-import { listOfShitToDo, ThingToDo } from './logic.js';
+import { listOfShitToDo, ThingToDo, addShitToDo } from './logic.js';
 
 // Greeting
 const domManipulationFileGreeting =
@@ -28,11 +28,10 @@ const element = {
   sidebar: document.querySelector('#sidebar'),
 };
 
-// Regular Functions
 // function toggleCheckThisShit() {}
-
 // function filterByProject() {}
 
+// Functions
 function getFormValues() {
   const title = document.querySelector('#the-shit').value;
   const description = document.querySelector('#the-details-of-the-shit').value;
@@ -44,10 +43,10 @@ function getFormValues() {
   const selectedProject = document.querySelector(
     'input[name="project"]:checked',
   ).value;
-  return (title, description, dueDate, priority, isChecked, selectedProject);
+  return { title, description, dueDate, priority, isChecked, selectedProject };
 }
 
-function createNewProject() {
+function createNewProject(selectedProject) {
   let project;
   if (selectedProject === 'other') {
     project = element.customProject.value;
@@ -60,22 +59,9 @@ function createNewProject() {
   return project;
 }
 
-function addShitToDo() {
-  const newThingToDo = new ThingToDo(
-    title,
-    description,
-    dueDate,
-    priority,
-    project,
-    isChecked,
-  );
-  listOfShitToDo.push(newThingToDo);
-  return newThingToDo;
-}
-
-function displayShitToDo() {
+function displayShitToDo(newThingToDo) {
   const newEntry = document.createElement('p');
-  newEntry.textContent = `Title: ${title}, Description: ${description}, Due Date: ${dueDate}, Priority: ${priority}, Project: ${project}, Checked: ${isChecked}`;
+  newEntry.textContent = `Title: ${newThingToDo.title}, Description: ${newThingToDo.description}, Due Date: ${newThingToDo.dueDate}, Priority: ${newThingToDo.priority}, Project: ${newThingToDo.project}, Checked: ${newThingToDo.isChecked}`;
   element.shitToDoSection.appendChild(newEntry);
   const removeEntryBtn = document.createElement('button');
   removeEntryBtn.textContent = 'Remove This Shit';
@@ -90,58 +76,12 @@ function displayShitToDo() {
   });
 }
 
-// addThingToDo Function Refactored Below:
 function handleFormSubmission() {
-  getFormValues();
-  createNewProject();
-  addShitToDo();
-  displayShitToDo();
+  const formValues = getFormValues();
+  const newProject = createNewProject(formValues.selectedProject);
+  const newThingToDo = addShitToDo(formValues, newProject);
+  displayShitToDo(newThingToDo);
 }
-
-// function addThingToDo() {
-//   const title = document.querySelector('#the-shit').value;
-//   const description = document.querySelector('#the-details-of-the-shit').value;
-//   const dueDate = document.querySelector('#due-date').value;
-//   const priority = document.querySelector(
-//     'input[name="importance"]:checked',
-//   ).value;
-//   const isChecked = false;
-//   const selectedProject = document.querySelector(
-//     'input[name="project"]:checked',
-//   ).value;
-//   let project;
-//   if (selectedProject === 'other') {
-//     project = element.customProject.value;
-//     const newProject = document.createElement('button');
-//     newProject.textContent = element.customProject.value;
-//     button.defaultProjectSidebar.after(newProject);
-//   } else {
-//     project = 'Default Project';
-//   }
-//   const newThingToDo = new ThingToDo(
-//     title,
-//     description,
-//     dueDate,
-//     priority,
-//     project,
-//     isChecked,
-//   );
-//   listOfShitToDo.push(newThingToDo);
-//   const newEntry = document.createElement('p');
-//   newEntry.textContent = `Title: ${title}, Description: ${description}, Due Date: ${dueDate}, Priority: ${priority}, Project: ${project}, Checked: ${isChecked}`;
-//   element.shitToDoSection.appendChild(newEntry);
-//   const removeEntryBtn = document.createElement('button');
-//   removeEntryBtn.textContent = 'Remove This Shit';
-//   newEntry.appendChild(removeEntryBtn);
-//   removeEntryBtn.addEventListener('click', () => {
-//     const index = listOfShitToDo.indexOf(newThingToDo);
-//     if (index > -1) {
-//       listOfShitToDo.splice(index, 1);
-//       newEntry.remove();
-//     }
-//     console.log(listOfShitToDo);
-//   });
-// }
 
 function toggleCustomProjectInput() {
   element.choiceOfProject.forEach((radio) => {
@@ -188,7 +128,6 @@ export {
   element,
   getFormValues,
   createNewProject,
-  addShitToDo,
   displayShitToDo,
   handleFormSubmission,
   closeForm,

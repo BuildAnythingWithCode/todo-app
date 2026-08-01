@@ -2,14 +2,18 @@
 
 // Webpack Stuff
 import './styles.css';
-import { logicFileGreeting, listOfShitToDo, ThingToDo } from './logic.js';
+import {
+  logicFileGreeting,
+  listOfShitToDo,
+  ThingToDo,
+  addShitToDo,
+} from './logic.js';
 import {
   domManipulationFileGreeting,
   button,
   element,
   getFormValues,
   createNewProject,
-  addShitToDo,
   displayShitToDo,
   handleFormSubmission,
   closeForm,
