@@ -7,6 +7,7 @@ import {
   addThingToDo,
   closeForm,
   setupEventListeners,
+  toggleCustomProjectInput,
 } from './dom-manipulation.js';
 
 // Greeting
@@ -25,25 +26,5 @@ function ThingToDo(title, description, dueDate, priority, project, isChecked) {
   this.isChecked = isChecked;
 }
 
-// Regular Functions
-function toggleCustomProjectInput() {
-  element.choiceOfProject.forEach((radio) => {
-    radio.addEventListener('change', () => {
-      if (element.defaultProject.checked) {
-        element.customProject.disabled = true;
-        element.customProject.required = false;
-      } else {
-        element.customProject.disabled = false;
-        element.customProject.required = true;
-      }
-    });
-  });
-}
-
 // Export Section
-export {
-  logicFileGreeting,
-  listOfShitToDo,
-  ThingToDo,
-  toggleCustomProjectInput,
-};
+export { logicFileGreeting, listOfShitToDo, ThingToDo };

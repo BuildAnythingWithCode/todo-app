@@ -1,10 +1,6 @@
 'use strict';
 
-import {
-  listOfShitToDo,
-  ThingToDo,
-  toggleCustomProjectInput,
-} from './logic.js';
+import { listOfShitToDo, ThingToDo } from './logic.js';
 
 // Greeting
 const domManipulationFileGreeting =
@@ -86,6 +82,20 @@ function addThingToDo() {
   });
 }
 
+function toggleCustomProjectInput() {
+  element.choiceOfProject.forEach((radio) => {
+    radio.addEventListener('change', () => {
+      if (element.defaultProject.checked) {
+        element.customProject.disabled = true;
+        element.customProject.required = false;
+      } else {
+        element.customProject.disabled = false;
+        element.customProject.required = true;
+      }
+    });
+  });
+}
+
 function closeForm() {
   element.form.reset();
   element.modal.close();
@@ -118,4 +128,5 @@ export {
   addThingToDo,
   closeForm,
   setupEventListeners,
+  toggleCustomProjectInput,
 };
