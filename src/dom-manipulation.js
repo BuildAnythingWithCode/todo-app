@@ -1,8 +1,9 @@
 'use strict';
 
+//Import Section
 import { listOfShitToDo, ThingToDo, addShitToDo } from './logic.js';
 
-// Greeting
+// Test Greeting
 const domManipulationFileGreeting =
   'Dom manipulation file successfully imported!';
 
@@ -27,9 +28,6 @@ const element = {
   choiceOfProject: document.querySelectorAll("input[name='project']"),
   sidebar: document.querySelector('#sidebar'),
 };
-
-// function toggleCheckThisShit() {}
-// function filterByProject() {}
 
 // Functions
 function getFormValues() {
@@ -101,6 +99,9 @@ function closeForm() {
   element.form.reset();
   element.modal.close();
 }
+
+// function toggleCheckThisShit() {}
+// function filterByProject() {}
 
 // Event Handler Function
 function setupEventListeners() {

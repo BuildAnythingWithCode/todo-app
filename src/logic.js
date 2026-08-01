@@ -1,8 +1,9 @@
 'use strict';
 
-// Greeting
+// Test Greeting
 const logicFileGreeting = 'Logic file successfully imported!';
 
+// Array Of Shit To Do
 const listOfShitToDo = [];
 
 // Constructor Function
@@ -15,6 +16,7 @@ function ThingToDo(title, description, dueDate, priority, project, isChecked) {
   this.isChecked = isChecked;
 }
 
+// Functions
 function addShitToDo(formValues, newProject) {
   const newThingToDo = new ThingToDo(
     formValues.title,

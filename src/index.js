@@ -1,6 +1,6 @@
 'use strict';
 
-// Webpack Stuff
+// Import Section
 import './styles.css';
 import {
   logicFileGreeting,
