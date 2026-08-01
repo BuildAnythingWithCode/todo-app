@@ -53,6 +53,7 @@ function createNewProject(selectedProject) {
   let project;
   if (selectedProject === 'other') {
     project = element.customProject.value;
+    listOfProjects.push(project);
     const newProject = document.createElement('button');
     newProject.textContent = element.customProject.value;
     button.defaultProjectSidebar.after(newProject);
@@ -75,7 +76,7 @@ function displayShitToDo(newThingToDo) {
       listOfShitToDo.splice(index, 1);
       newEntry.remove();
     }
-    console.log(listOfShitToDo);
+    console.log(listOfShitToDo, listOfProjects);
   });
 }
 
@@ -122,7 +123,7 @@ function setupEventListeners() {
   element.form.addEventListener('submit', (event) => {
     event.preventDefault();
     handleFormSubmission();
-    console.log('form submitted!', listOfShitToDo);
+    console.log('form submitted!', listOfShitToDo, listOfProjects);
     element.form.reset();
     element.modal.close();
   });

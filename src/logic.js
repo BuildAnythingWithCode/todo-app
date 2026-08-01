@@ -7,7 +7,7 @@ const logicFileGreeting = 'Logic file successfully imported!';
 const listOfShitToDo = [];
 
 // Array Of Projects
-const listOfProjects = [];
+const listOfProjects = ['Default Project'];
 
 // Constructor Function
 function ThingToDo(title, description, dueDate, priority, project, isChecked) {
