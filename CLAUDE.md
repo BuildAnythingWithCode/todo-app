@@ -40,27 +40,71 @@ Requirements checklist:
 
 ## Where we left off (update this at the end of each session)
 
-2026-08-01 (later): Big session. Gregory completed the module separation
-(logic.js = data + constructor, imports nothing; dom-manipulation.js = all DOM)
-AND refactored the old mega-function `addThingToDo` into single-responsibility
-functions: `handleFormSubmission` (conductor) → `getFormValues` →
-`createNewProject` → `addShitToDo` → `displayShitToDo`, wired with
-parameters/returns. Build green, behavior verified in browser.
+### 2026-08-10 — long session, big progress
 
-He fought hard through **scope and data-flow** (variables local to functions,
-catch-and-pass via return values). It clicked but is still fresh/fragile —
-reinforce gently next session, don't assume mastery. Deleted functions.js
-(dead code lesson). He knows: read webpack errors, `.js` extension required
-in imports ("type": "module"), circular imports are a fire alarm.
+**Done and committed** (last commit: `fe64708`):
+- Module separation complete. `logic.js` = `listOfShitToDo`, `listOfProjects`
+  (seeded with `'Default Project'`), `ThingToDo` constructor, `addShitToDo`.
+  It imports NOTHING — pure, no DOM. `dom-manipulation.js` = all screen code.
+- Refactored the old mega-function `addThingToDo` into single-responsibility
+  functions wired with parameters and return values:
+  `handleFormSubmission` (conductor) → `getFormValues` → `createNewProject`
+  → `addShitToDo` → `displayShitToDo`.
+- Deleted `functions.js` and the commented-out old code (dead-code lesson).
+- Added `listOfProjects`; custom projects now get pushed onto it.
 
-Naming: the shit-themed names are INTENTIONAL (it's "a shit to do app" — his
-branding). Don't suggest renaming; it's settled.
+**IN PROGRESS — app is currently broken at runtime, warn him first thing:**
+He is mid-way through extracting delete into logic. In
+`displayShitToDo`'s remove-button listener he already deleted the
+`const index = listOfShitToDo.indexOf(newThingToDo);` line, but `logic.js`
+does not have `deleteThisShit` yet — so the listener references an `index`
+that no longer exists. Webpack still compiles (it's a runtime ReferenceError,
+not a build error — itself a teachable moment). The plan he agreed to:
+- `logic.js` gets `deleteThisShit(newThingToDo)` containing the indexOf, the
+  `if (index > -1)` guard, and the splice. The `if` goes to logic because its
+  *condition* is a question about data.
+- The listener shrinks to two lines: `deleteThisShit(newThingToDo);` then
+  `newEntry.remove();` (unconditional now — we decided that's fine//better).
 
-Next up (in rough order):
-1. Cleanup: delete commented-out old addThingToDo block, commit
-2. `addShitToDo` is still in dom-manipulation.js — it's pure logic; move it
-   to logic.js (nice small win to reinforce the concept)
-3. `createNewProject` still mixes logic (choosing project name) with DOM
-   (sidebar button) — good next split exercise
-4. Then: refreshShitToDo/render-from-array pattern, project filtering,
-   expand/edit todos, priority colors, localStorage, date-fns
+**What he learned today (fresh, fragile — reinforce, don't assume mastery):**
+- **Scope and data flow** — the hard-won one. Functions share data ONLY through
+  parameters (in) and return values (out). Values cross function boundaries;
+  variable names never do; object property keys cross because they're part of
+  the value. He asked this three different ways and got there. Rule he can
+  lean on: "if a function returns something you want, catch it in a variable."
+- Define vs. call vs. call-and-catch (`f()` vs `const x = f()`).
+- `return (a, b, c)` is the comma operator, not an object — use `{ }`.
+- `.js` extension required in imports (`"type": "module"`), read webpack
+  errors closely, circular imports are a fire alarm, `push/pop/shift/unshift`.
+- The seam test: say a function's job out loud; every "and" is a split point.
+  An `if` belongs wherever its *condition* belongs.
+
+**Open items he chose to defer (don't nag):**
+- `ThingToDo` is still imported into `dom-manipulation.js` but unused there.
+- `createNewProject` (in the DOM file) still pushes to `listOfProjects`
+  directly instead of calling a logic-side `addProject(name)`. Discussed: data
+  should have ONE door, and that door matters when localStorage arrives.
+  Also still mixes "decide the project name" with "build the sidebar button".
+- Duplicate projects: adding two todos with the same custom project name
+  pushes the name twice and makes two sidebar buttons. He was asked to just
+  *observe* this in the console; address it when it bothers him.
+
+**Naming:** the shit-themed names are INTENTIONAL — it's "a shit to do app",
+his branding. Don't suggest renaming; that's settled.
+
+**Next up (rough order):**
+1. Finish `deleteThisShit` (see IN PROGRESS above), test, commit.
+2. Optional small wins: `addProject` in logic; split the sidebar-button
+   building out of `createNewProject`.
+3. The big one: `refreshShitToDo` — wipe the todo section and redraw
+   everything from `listOfShitToDo`. Simplifies delete, makes project
+   filtering nearly free, and is the hook localStorage plugs into.
+4. Then: project filtering, expand/edit a todo, priority color-coding,
+   localStorage, date-fns.
+
+**Tutoring notes:** he pushes back and asks genuinely good conceptual
+questions ("is this level of separation industry standard?") — engage
+honestly, including the limits of the advice. He gets frustrated when given
+three things at once; go ONE step at a time and confirm before moving on.
+When he's stuck and demoralized, showing one worked example and letting him
+pattern-match the rest works well.
